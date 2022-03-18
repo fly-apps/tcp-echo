@@ -1,0 +1,104 @@
+app = "tcp-echo"
+
+kill_signal  = "SIGINT"
+kill_timeout = 5
+
+[experimental]
+auto_rollback = true
+
+[[services]]
+internal_port = 8080
+protocol      = "tcp"
+
+  [services.concurrency]
+  hard_limit = 5000
+  soft_limit = 4000
+  type       = "connections"
+
+  [[services.ports]]
+  port = 5000
+
+  [[services.ports]]
+  port = 5002
+
+  [[services.ports]]
+  port = 5004
+
+  [[services.ports]]
+  port = 6000
+
+  [[services.ports]]
+  port = 6002
+
+  [[services.ports]]
+  port = 6004
+
+  [[services.ports]]
+  port = 7000
+
+  [[services.ports]]
+  port = 7002
+
+  [[services.ports]]
+  port = 7004
+
+[[services]]
+internal_port = 8081
+protocol      = "tcp"
+
+  [services.concurrency]
+  hard_limit = 5000
+  soft_limit = 4000
+  type       = "connections"
+
+  [[services.ports]]
+  port = 5001
+
+  [[services.ports]]
+  port = 5003
+
+  [[services.ports]]
+  port = 5005
+
+  [[services.ports]]
+  port = 6001
+
+  [[services.ports]]
+  port = 6003
+
+  [[services.ports]]
+  port = 6005
+
+  [[services.ports]]
+  port = 7001
+
+  [[services.ports]]
+  port = 7003
+
+  [[services.ports]]
+  port = 7005
+
+
+[[services]]
+internal_port = 80
+protocol      = "tcp"
+
+  [services.concurrency]
+  hard_limit = 5000
+  soft_limit = 4000
+  type       = "connections"
+
+  [[services.ports]]
+  handlers = [ "http" ]
+  port     = 80
+
+  [[services.ports]]
+  handlers = [ "http", "tls" ]
+  port     = 443
+
+
+  [[services.tcp_checks]]
+  grace_period  = "1s"
+  interval      = "15s"
+  restart_limit = 0
+  timeout       = "2s"
