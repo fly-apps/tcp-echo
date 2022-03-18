@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"sort"
 	"strconv"
 	"sync"
 
@@ -171,8 +172,11 @@ func readPorts() ([]int, error) {
 				continue
 			}
 			ports = append(ports, port.Port)
+
 		}
 	}
+
+	sort.Ints(ports)
 
 	return ports, nil
 }
